@@ -51,6 +51,14 @@ class TagsController < ApplicationController
     end
   end
 
+  def find_recipe
+    @tag = Tag.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @tag.recipe = @recipe
+    
+    render 'show.html.erb'
+  end
+
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy

@@ -1,9 +1,13 @@
 <p id="notice"><%= notice %></p>
+<% content_for(:name, @tag.name) %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @tag.name %>
-</p>
+<h1>
+  <strong><%= @tag.name %></strong>
+</h1>
+
+
+<a href="/recipes/<%= @tag.recipe_id %>"><p><strong><%= @tag.recipe.title %></strong></p>
+</a>
 
 <%= link_to 'Edit', edit_tag_path(@tag) %> |
 <%= link_to 'Back', tags_path %>

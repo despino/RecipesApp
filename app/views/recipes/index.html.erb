@@ -20,8 +20,8 @@
         <td><%= recipe.author %></td>
         <td><%= recipe.ingredients %></td>
         <td><%= recipe.instructions %></td>
-        <td><%= link_to 'Show', recipe %></td>
-        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
+        <td><%= link_to 'Show', recipe %> |</td>
+        <td><%= link_to 'Edit', edit_recipe_path(recipe) %> |</td> 
         <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -30,6 +30,6 @@
 
 <br>
 
-<%= link_to 'Back to Homepage', root_path %>
+<%= link_to 'Back to Homepage', root_path %> |
 
 <%= link_to 'New Recipe', new_recipe_path %>
