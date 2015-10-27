@@ -21,6 +21,19 @@ class RecipesController < ApplicationController
   def edit
   end
 
+  #POST /recipes/1/add_tag
+  def add_tag
+    @recipe = Recipe.find(params[:id])
+    newTag = Tag.new(params[:tag])
+    if newTag.valid?
+      newTag.save
+      @recipe.tags << newTag
+      @recipe.save
+    end
+    render 'show.html.erb'
+  end
+
+
   # POST /recipes
   # POST /recipes.json
   def create

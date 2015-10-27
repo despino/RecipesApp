@@ -1,9 +1,10 @@
 <p id="notice"><%= notice %></p>
+<% content_for(:title, @recipe.title) %>
 
-<p>
+<h1>
   <strong>Title:</strong>
   <%= @recipe.title %>
-</p>
+</h1>
 
 <p>
   <strong>Author:</strong>
@@ -19,6 +20,23 @@
   <strong>Instructions:</strong>
   <%= @recipe.instructions %>
 </p>
+
+<p>
+  <strong>Tags: </strong>
+  <% @recipe.tags.each do |tag| %>
+    <%= tag.name %>,
+  <% end %>
+</p>
+
+<form action="/recipes/<%= @recipe.id %>/add_tag" method="post">
+  <div class="field">
+    <label for="tag_name">Tag Name</label>
+    <input type="text" name="tag[name]" id="tag_name">
+  </div>
+  <div class="actions">
+    <input type="submit" name="commit" value="Add Tag">
+  </div>
+</form>
 
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %>

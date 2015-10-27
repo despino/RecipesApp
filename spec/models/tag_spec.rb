@@ -12,4 +12,12 @@ RSpec.describe Tag, type: :model do
     aTag.name = "chicken"
     expect(aTag.valid?).to eq true
   end
+
+  it "should have a recipe" do
+    aTag = Tag.new
+    aTag.name = "newTag"
+    aRecipe = Recipe.new
+    aTag.recipe = aRecipe
+    expect(aTag.recipe).to eq aRecipe
+  end
 end

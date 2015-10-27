@@ -25,5 +25,12 @@ RSpec.describe Recipe, type: :model do
     expect(aRecipe.instructions).to eq "blah-blah"
   end
 
-
+  it "can have many tags (maybe)" do
+    aRecipe = Recipe.new
+    aTag = Tag.new
+    aTag2 = Tag.new
+    aRecipe.tags << aTag
+    aRecipe.tags << aTag2
+    expect(aRecipe.tags).to match_array [aTag, aTag2]
+  end
 end

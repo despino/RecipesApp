@@ -4,4 +4,5 @@ class Recipe < ActiveRecord::Base
   validates :ingredients, :presence => true
   validates :instructions, :presence => true
 
+  has_many :tags
 end
