@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
-  resources :tags
-  resources :recipes
+
   root :to => 'welcome#index'
   match('/recipes/:id/add_tag', {:via => :post, :to => 'recipes#add_tag'})
-  match('/tags/:id', {:via => :get, :to => 'tags#find_recipe'})
+  # match('/tags/:id', {:via => :get, :to => 'tags#find_recipe'})
+  match('/tags/search', {:via => :get, :to => 'tags#search'})
+
+  resources :tags
+  resources :recipes
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

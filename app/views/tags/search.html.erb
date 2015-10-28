@@ -1,0 +1,21 @@
+
+<h1>Search for Recipes by Tags</h1>
+
+<form action="/tags/search" method="get">
+  <label for="tag_search_input">Tag Name:</label>
+  <input id="tag_search_input" type="text" name="search_string"></input>
+  <input type="submit" value="Search"></input>
+</form>
+
+<hr/>
+
+<% if !@tags.nil? %>
+  <% if !@tags.empty? %>
+    <h3>Recipes Found:</h3>
+    <% @tags.each do |tag| %>
+      <p id="search"><%= link_to(tag.recipe.title, tag.recipe) %></p>
+    <% end %>
+  <% else %>
+    <h3>No Recipes Found!</h3>
+  <% end %>
+<% end %>

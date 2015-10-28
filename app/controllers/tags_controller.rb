@@ -55,9 +55,25 @@ class TagsController < ApplicationController
     @tag = Tag.find(params[:id])
     @recipe = Recipe.find(params[:recipe_id])
     @tag.recipe = @recipe
-    
+
     render 'show.html.erb'
   end
+
+  #SEARCH /tags/search
+  def search
+    if !params[:search_string].nil?
+      search_string = params[:search_string].strip
+      @tags = Tag.where(:name => search_string)
+    end
+  end
+  # def search
+  #   @search_string = params[:search_string]
+  #   @search_string = @search_string.strip
+  #   if @search_string.valid?
+  #     @tags = []
+  #   else
+  #     @tags.
+  # end
 
   # DELETE /tags/1
   # DELETE /tags/1.json
