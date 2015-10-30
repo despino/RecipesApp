@@ -33,4 +33,40 @@ RSpec.describe Recipe, type: :model do
     aRecipe.tags << aTag2
     expect(aRecipe.tags).to match_array [aTag, aTag2]
   end
+
+  it "can have many ratings (maybe)" do
+    aRecipe = Recipe.new
+    aRating = Rating.new
+    aRating2 = Rating.new
+    aRecipe.ratings << aRating
+    aRecipe.ratings << aRating2
+    expect(aRecipe.ratings).to match_array [aRating, aRating2]
+  end
+
+  it "should have an average rating" do
+    aRecipe = Recipe.new
+    aRecipe.title = "Spaghetti"
+    aRecipe.author = "myAuthor"
+    aRecipe.ingredients = "myIngredients"
+    aRecipe.instructions = "myInstructions"
+
+    aRating = Rating.new
+    aRating.rating = 4
+    aRating.save
+
+    aRating2 = Rating.new
+    aRating2.rating = 5
+    aRating2.save
+
+    aRecipe.ratings << aRating
+    aRecipe.ratings << aRating2
+    expect(aRecipe.save).to eq true
+
+    expect(aRecipe).not_to eq nil
+    expect(aRecipe.ratings).not_to eq nil
+    expect(aRecipe.ratings).to match_array [aRating, aRating2]
+    expect(aRecipe.ratings.average(:rating)).to eq 4.5
+
+  end
+
 end

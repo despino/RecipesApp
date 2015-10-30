@@ -33,6 +33,18 @@ class RecipesController < ApplicationController
     render 'show.html.erb'
   end
 
+  def add_rating
+    @recipe = Recipe.find(params[:id])
+    newRating = Rating.new(params[:rating])
+    if newRating.valid?
+      newRating.save
+      @recipe.ratings << newRating
+      # @avgRating = @recipe.ratings.average(:rating).round(1)
+      @recipe.save
+    end
+    render 'show.html.erb'
+  end
+
 
   # POST /recipes
   # POST /recipes.json

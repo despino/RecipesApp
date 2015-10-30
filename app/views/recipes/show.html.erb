@@ -1,9 +1,28 @@
+
 <p id="notice"><%= notice %></p>
 <% content_for(:title, @recipe.title) %>
 
 <h1>
   <strong><%= @recipe.title %></strong>
 </h1>
+
+<h3>
+    <% if !@recipe.ratings.average(:rating).nil? %>
+      <strong>Rating:</strong>
+      <%= @recipe.ratings.average(:rating).round(1) %>
+    <% end %>
+</h3>
+
+<form action="/recipes/<%=@recipe.id%>/add_rating" method="post">
+  <select id="rating_id" name="rating[rating]" onchange="this.form.submit()">
+    <option>Rate It</options>
+    <option value="1">1 Star</option>
+    <option value="2">2 Stars</option>
+    <option value="3">3 Stars</option>
+    <option value="4">4 Stars</option>
+    <option value="5">5 Stars</option>
+  </select>
+</form>
 
 <p>
   <strong>Author:</strong>
@@ -36,6 +55,7 @@
     <input type="submit" name="commit" value="Add Tag">
   </div>
 </form>
+
 
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %> |
