@@ -11,6 +11,7 @@ describe "adding a rating to a recipe" do
 
 
     select("1 Star", :from => 'rating_id')
+    click_button 'Add Rating'
     page.should have_content 'Rating:'
   end
 end

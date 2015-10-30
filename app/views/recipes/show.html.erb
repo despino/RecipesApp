@@ -14,7 +14,7 @@
 </h3>
 
 <form action="/recipes/<%=@recipe.id%>/add_rating" method="post">
-  <select id="rating_id" name="rating[rating]" onchange="this.form.submit()">
+  <select id="rating_id" name="rating[rating]">
     <option>Rate It</options>
     <option value="1">1 Star</option>
     <option value="2">2 Stars</option>
@@ -22,6 +22,9 @@
     <option value="4">4 Stars</option>
     <option value="5">5 Stars</option>
   </select>
+  <div class="actions">
+    <input type="submit" value="Add Rating">
+  </div>
 </form>
 
 <p>
