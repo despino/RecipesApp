@@ -7,9 +7,9 @@
 </h1>
 
 <h3>
-    <% if !@recipe.ratings.average(:rating).nil? %>
+    <% if !@recipe.avgRating.nil? %>
       <strong>Rating:</strong>
-      <%= @recipe.ratings.average(:rating).round(1) %>
+      <%= @recipe.avgRating.round(1) %>
     <% end %>
 </h3>
 
@@ -26,6 +26,8 @@
     <input type="submit" value="Add Rating">
   </div>
 </form>
+
+
 
 <p>
   <strong>Author:</strong>
@@ -59,6 +61,7 @@
   </div>
 </form>
 
+<%= params %>
 
 <%= link_to 'Edit', edit_recipe_path(@recipe) %> |
 <%= link_to 'Back', recipes_path %> |

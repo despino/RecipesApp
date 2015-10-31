@@ -6,4 +6,10 @@ class Recipe < ActiveRecord::Base
 
   has_many :tags
   has_many :ratings
+
+  def avgRating
+    ratings.average(:rating)
+  end
+
+
 end

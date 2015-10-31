@@ -44,7 +44,34 @@ class RecipesController < ApplicationController
     end
     render 'show.html.erb'
   end
+  # def sort
+  #   @recipes = Recipe.all
+  #   recipeRating = Rating.where(params[:recipe_id])
+  #   aRecipeRating = []
+  #   if !recipeRating.nil?
+  #     @recipes.each do |recipe|
+  #       recipeRating = recipe.ratings
+  #       aRecipeRating << recipeRating
+  #       aRecipeRating.inject { |sum, el| sum + el } / aRecipeRating.size
+  #     end
+  #   else
+  #     puts "I don't know"
+  #   end
 
+    # @ratings = Rating.all
+    # @ratings = Rating.order.average(rating: :asc)
+  # end
+
+  # def sort
+  #   @recipes = Recipe.all
+  #   @recipes = Recipe.order(title: :asc)
+  # end
+
+avgRating
+
+def average
+@avgRating = @recipe.ratings.average
+end
 
   # POST /recipes
   # POST /recipes.json

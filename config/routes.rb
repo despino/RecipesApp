@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   match('/recipes/:id/add_rating', {:via => :post, :to => 'recipes#add_rating'})
   resources :ratings
+  match('/recipes/sort', {:via => :get, :to => 'recipes#sort'})
   root :to => 'welcome#index'
   match('/recipes/:id/add_tag', {:via => :post, :to => 'recipes#add_tag'})
   # match('/tags/:id', {:via => :get, :to => 'tags#find_recipe'})
