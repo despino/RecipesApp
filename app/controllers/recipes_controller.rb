@@ -39,39 +39,14 @@ class RecipesController < ApplicationController
     if newRating.valid?
       newRating.save
       @recipe.ratings << newRating
-      # @avgRating = @recipe.ratings.average(:rating).round(1)
+      @recipe.average_rating = @recipe.ratings.average(:rating)
       @recipe.save
     end
     render 'show.html.erb'
   end
-  # def sort
-  #   @recipes = Recipe.all
-  #   recipeRating = Rating.where(params[:recipe_id])
-  #   aRecipeRating = []
-  #   if !recipeRating.nil?
-  #     @recipes.each do |recipe|
-  #       recipeRating = recipe.ratings
-  #       aRecipeRating << recipeRating
-  #       aRecipeRating.inject { |sum, el| sum + el } / aRecipeRating.size
-  #     end
-  #   else
-  #     puts "I don't know"
-  #   end
 
-    # @ratings = Rating.all
-    # @ratings = Rating.order.average(rating: :asc)
-  # end
 
-  # def sort
-  #   @recipes = Recipe.all
-  #   @recipes = Recipe.order(title: :asc)
-  # end
 
-avgRating
-
-def average
-@avgRating = @recipe.ratings.average
-end
 
   # POST /recipes
   # POST /recipes.json
@@ -112,6 +87,11 @@ end
       format.json { head :no_content }
     end
   end
+
+  def sort
+    @recipes = Recipe.all.order(average_rating: :desc)
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

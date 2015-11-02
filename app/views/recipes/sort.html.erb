@@ -17,10 +17,10 @@
         <tr>
           <td><%= recipe.title %></td>
           <td><%= recipe.author %></td>
-          <% if !recipe.avgRating.nil? %>
-            <td><%= recipe.avgRating.round(1) %></td>
+          <% if !recipe.average_rating.nil? %>
+            <td><%= recipe.average_rating.round(1) %></td>
           <% else%>
-            <td><%= recipe.avgRating %></td>
+            <td><%= "Not Rated." %></td>
           <% end %>
           <td><%= link_to 'Show', recipe %> |</td>
           <td><%= link_to 'Edit', edit_recipe_path(recipe) %> |</td>
