@@ -1,14 +1,25 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
-  # GET /recipes
-  # GET /recipes.json
+def search_by_ingredients
+  if !params[:recipe_search_string].nil?
+    recipe_search_string = params[:recipe_search_string].strip
+    @recipe = Recipe.where(
+    "ingredients like '%#{recipe_search_string.capitalize}%' OR ingredients like '%#{recipe_search_string.downcase}%' OR ingredients like '%#{recipe_search_string.upcase}%'  "+
+    "OR instructions like '%#{recipe_search_string.capitalize}%' OR instructions like '%#{recipe_search_string.downcase}%' OR instructions like '%#{recipe_search_string.upcase}%' "+
+    "OR title like '%#{recipe_search_string.capitalize}%' OR title like '%#{recipe_search_string.downcase}%' OR title like '%#{recipe_search_string.upcase}%' "+
+    "OR author like '%#{recipe_search_string.capitalize}%' OR author like '%#{recipe_search_string.downcase}%' OR author like '%#{recipe_search_string.upcase}%' ")
+
+  end
+end
+
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.all.order("-average_rating asc")
+    recipeNotRated = Recipe.where(:average_rating => nil)
+    random_recipe = recipeNotRated.sample
+    @recipes.unshift(random_recipe)
   end
 
-  # GET /recipes/1
-  # GET /recipes/1.json
   def show
   end
 
@@ -17,11 +28,9 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
   end
 
-  # GET /recipes/1/edit
   def edit
   end
 
-  #POST /recipes/1/add_tag
   def add_tag
     @recipe = Recipe.find(params[:id])
     newTag = Tag.new(params[:tag])
@@ -44,8 +53,6 @@ class RecipesController < ApplicationController
     end
     render 'show.html.erb'
   end
-
-
 
 
   # POST /recipes
@@ -88,9 +95,10 @@ class RecipesController < ApplicationController
     end
   end
 
-  def sort
-    @recipes = Recipe.all.order(average_rating: :desc)
-  end
+  # def sort
+  #   @recipes = Recipe.all.order(average_rating: :desc)
+  #   render 'index.html.erb'
+  # end
 
 
   private

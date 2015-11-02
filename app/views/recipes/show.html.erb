@@ -7,9 +7,9 @@
 </h1>
 
 <h3>
-    <% if !@recipe.avgRating.nil? %>
+    <% if !@recipe.average_rating.nil? %>
       <strong>Rating:</strong>
-      <%= @recipe.avgRating.round(1) %>
+      <%= @recipe.average_rating.round(1) %>
     <% end %>
 </h3>
 

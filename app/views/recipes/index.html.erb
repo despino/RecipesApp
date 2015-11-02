@@ -20,7 +20,7 @@
           <% if !recipe.average_rating.nil? %>
             <td><%= recipe.average_rating.round(1) %></td>
           <% else%>
-            <td><%= "Not Rated." %></td>
+            <td><%= "New Recipe!" %></td>
           <% end %>
           <td><%= link_to 'Show', recipe %> |</td>
           <td><%= link_to 'Edit', edit_recipe_path(recipe) %> |</td>
@@ -30,12 +30,16 @@
   </tbody>
 </table>
 
-<form action="/recipes/sort" method="get">
-  <input type="submit" value="Order By Rating">
+<hr/>
+
+<form action="/recipes/search" method="get">
+  <label for="recipe_search_input">Search for:</label>
+  <input id="recipe_search_input" type="text" name="recipe_search_string"></input>
+  <input type="submit" value="Search"></input>
 </form>
 
+<hr/>
 
-<br>
 
 <%= link_to 'Back to Homepage', root_path %> |
 
