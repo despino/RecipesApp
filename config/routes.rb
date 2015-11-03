@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
+  root :to => 'welcome#index'
+
+  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
   match('/recipes/search', {:via => :get, :to => 'recipes#search_by_ingredients'})
   match('/recipes/:id/add_rating', {:via => :post, :to => 'recipes#add_rating'})
+  match('/users/login', {:via => :get, :from => 'devise/sessions#new'})
+
   resources :ratings
-  root :to => 'welcome#index'
   match('/recipes/:id/add_tag', {:via => :post, :to => 'recipes#add_tag'})
   # match('/tags/:id', {:via => :get, :to => 'tags#find_recipe'})
   match('/tags/search', {:via => :get, :to => 'tags#search'})
 
   resources :tags
   resources :recipes
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
