@@ -10,3 +10,10 @@ p {
   font-size: 14px;
   font-family: sans-serif;
 }
+
+#googleMap {
+margin-top: 100px;
+border: red 10px dotted;
+
+
+}
