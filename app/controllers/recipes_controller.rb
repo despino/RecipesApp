@@ -3,19 +3,20 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
 def search_by_ingredients
-  if !params[:recipe_search_string].nil?
+  if !params[:recipe_search_string].nil? && !params[:recipe_search_string].empty?
     recipe_search_string = params[:recipe_search_string].strip
-    @recipe = Recipe.where(
+    @recipes = Recipe.where(
     "ingredients like '%#{recipe_search_string.capitalize}%' OR ingredients like '%#{recipe_search_string.downcase}%' OR ingredients like '%#{recipe_search_string.upcase}%'  "+
     "OR instructions like '%#{recipe_search_string.capitalize}%' OR instructions like '%#{recipe_search_string.downcase}%' OR instructions like '%#{recipe_search_string.upcase}%' "+
     "OR title like '%#{recipe_search_string.capitalize}%' OR title like '%#{recipe_search_string.downcase}%' OR title like '%#{recipe_search_string.upcase}%' "+
     "OR author like '%#{recipe_search_string.capitalize}%' OR author like '%#{recipe_search_string.downcase}%' OR author like '%#{recipe_search_string.upcase}%' ")
-
+  else
+    @recipes = []
   end
 end
 
   def index
-    @recipes = Recipe.all.order("-average_rating asc")
+    @recipes = Recipe.all_sorted_by_ratings
     recipeNotRated = Recipe.where(:average_rating => nil)
     random_recipe = recipeNotRated.sample
     @recipes.unshift(random_recipe)

@@ -8,10 +8,10 @@
 
 <hr/>
 
-<% if !@recipe.nil? %>
-  <% if !@recipe.empty? %>
+<% if !@recipes.nil? %>
+  <% if !@recipes.empty? %>
     <h3>Recipes Found:</h3>
-    <% @recipe.each do |recipe| %>
+    <% @recipes.each do |recipe| %>
       <p id="search"><%= link_to(recipe.title, recipe) %></p>
     <% end %>
   <% else %>

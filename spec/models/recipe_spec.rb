@@ -69,4 +69,27 @@ RSpec.describe Recipe, type: :model do
 
   end
 
+  it "should have a method to return all recipes sorted by ratings" do
+    aRecipe = Recipe.new
+    aRecipe.title = "Spaghetti"
+    aRecipe.author = "myAuthor"
+    aRecipe.ingredients = "myIngredients"
+    aRecipe.instructions = "myInstructions"
+    aRecipe.average_rating = 4.0
+    aRecipe.save
+
+    aRecipe2 = Recipe.new
+    aRecipe2.title = "Chicken"
+    aRecipe2.author = "Author2"
+    aRecipe2.ingredients = "Author2"
+    aRecipe2.instructions = "Author2"
+    aRecipe2.average_rating = 5.0
+    aRecipe2.save
+
+    recipes = Recipe.all_sorted_by_ratings
+
+    expect(recipes.first).to eq aRecipe2
+    expect(recipes.last).to eq aRecipe
+  end
+
 end

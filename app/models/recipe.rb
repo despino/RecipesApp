@@ -7,4 +7,8 @@ class Recipe < ActiveRecord::Base
   has_many :tags
   has_many :ratings
 
+  def self.all_sorted_by_ratings
+    Recipe.all.order("-average_rating asc")
+  end
+
 end
