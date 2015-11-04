@@ -17,9 +17,10 @@ end
 
   def index
     @recipes = Recipe.all_sorted_by_ratings
-    recipeNotRated = Recipe.where(:average_rating => nil)
-    random_recipe = recipeNotRated.sample
-    @recipes.unshift(random_recipe)
+    extraRecipe = Recipe.get_random_unrated_recipe_or_random_recipe
+    if !extraRecipe.nil?
+      @recipes.unshift(extraRecipe)
+    end
   end
 
   def show

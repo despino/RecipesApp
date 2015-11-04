@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Recipe, type: :model do
+  before(:each) do
+    Recipe.all.each { |r| r.destroy }
+  end
+
   it "should have a title" do
     aRecipe = Recipe.new
     aRecipe.title = "myTitle"
@@ -60,6 +64,7 @@ RSpec.describe Recipe, type: :model do
 
     aRecipe.ratings << aRating
     aRecipe.ratings << aRating2
+
     expect(aRecipe.save).to eq true
 
     expect(aRecipe).not_to eq nil
@@ -92,4 +97,38 @@ RSpec.describe Recipe, type: :model do
     expect(recipes.last).to eq aRecipe
   end
 
+  it "should have a method to return a random unreated when unrated recipes are available " do
+    aRecipe3 = Recipe.new
+    aRecipe3.title = "Steak"
+    aRecipe3.author = "uthor"
+    aRecipe3.ingredients = "ngredients"
+    aRecipe3.instructions = "nstructions"
+    aRecipe3.save
+
+    aRecipe4 = Recipe.new
+    aRecipe4.title = "ChickenBroth"
+    aRecipe4.author = "uthor2"
+    aRecipe4.ingredients = "uthor2"
+    aRecipe4.instructions = "uthor2"
+    aRecipe4.average_rating = 5.0
+    aRecipe4.save
+
+    recipe = Recipe.get_random_unrated_recipe_or_random_recipe
+
+    expect(recipe).to eq aRecipe3
+  end
+
+  it "should have a method to return a rated recipe when no unrated recipies are available" do
+    aRecipe4 = Recipe.new
+    aRecipe4.title = "ChickenBroth"
+    aRecipe4.author = "uthor2"
+    aRecipe4.ingredients = "uthor2"
+    aRecipe4.instructions = "uthor2"
+    aRecipe4.average_rating = 5.0
+    aRecipe4.save
+
+    recipe = Recipe.get_random_unrated_recipe_or_random_recipe
+
+    expect(recipe).to eq aRecipe4
+  end
 end

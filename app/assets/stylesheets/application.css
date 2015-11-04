@@ -29,3 +29,7 @@
  #search {
    font-size: 20px;
  }
+
+tbody {
+  text-align: center;
+}
