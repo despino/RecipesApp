@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'textacular', '~>3.0'
 gem 'devise'
 gem 'protected_attributes'
+gem 'paperclip'
 
 
 

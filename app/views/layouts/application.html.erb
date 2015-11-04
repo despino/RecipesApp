@@ -6,8 +6,11 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
+
   <div id="container">
+
     <div id="user_nav">
       <% if user_signed_in? %>
        Logged in as <strong><%= current_user.email %></strong>.
@@ -19,10 +22,8 @@
      <% end %>
    </div>
 
-
-
-
     <%= yield %>
+
   </div>
 
 </body>

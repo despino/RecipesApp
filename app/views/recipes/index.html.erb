@@ -16,6 +16,7 @@
       <% @recipes.each do |recipe| %>
         <tr>
           <td><%= recipe.title %></td>
+          <td><%= image_tag recipe.image.url(:small) %></td>
           <td><%= recipe.author %></td>
           <% if !recipe.average_rating.nil? %>
             <td><%= recipe.average_rating.round(1) %></td>
