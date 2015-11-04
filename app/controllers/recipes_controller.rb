@@ -2,18 +2,26 @@ class RecipesController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
-def search_by_ingredients
-  if !params[:recipe_search_string].nil? && !params[:recipe_search_string].empty?
-    recipe_search_string = params[:recipe_search_string].strip
-    @recipes = Recipe.where(
-    "ingredients like '%#{recipe_search_string.capitalize}%' OR ingredients like '%#{recipe_search_string.downcase}%' OR ingredients like '%#{recipe_search_string.upcase}%'  "+
-    "OR instructions like '%#{recipe_search_string.capitalize}%' OR instructions like '%#{recipe_search_string.downcase}%' OR instructions like '%#{recipe_search_string.upcase}%' "+
-    "OR title like '%#{recipe_search_string.capitalize}%' OR title like '%#{recipe_search_string.downcase}%' OR title like '%#{recipe_search_string.upcase}%' "+
-    "OR author like '%#{recipe_search_string.capitalize}%' OR author like '%#{recipe_search_string.downcase}%' OR author like '%#{recipe_search_string.upcase}%' ")
-  else
-    @recipes = []
+  def search_by_ingredients
+    if !params[:recipe_search_string].nil? && !params[:recipe_search_string].empty?
+      recipe_search_string = params[:recipe_search_string].strip
+      @recipes = Recipe.where(
+      "ingredients like '%#{recipe_search_string.capitalize}%' OR ingredients like '%#{recipe_search_string.downcase}%' OR ingredients like '%#{recipe_search_string.upcase}%'  "+
+      "OR instructions like '%#{recipe_search_string.capitalize}%' OR instructions like '%#{recipe_search_string.downcase}%' OR instructions like '%#{recipe_search_string.upcase}%' "+
+      "OR title like '%#{recipe_search_string.capitalize}%' OR title like '%#{recipe_search_string.downcase}%' OR title like '%#{recipe_search_string.upcase}%' "+
+      "OR author like '%#{recipe_search_string.capitalize}%' OR author like '%#{recipe_search_string.downcase}%' OR author like '%#{recipe_search_string.upcase}%' ")
+    else
+      @recipes = []
+    end
   end
-end
+
+  def get_random_recipe
+     @recipe = Recipe.all.sample
+     respond_to do |format|
+       format.html { redirect_to recipes_url }
+       format.json { render :show, status: :ok, location: @recipe }
+     end
+   end
 
   def index
     @recipes = Recipe.all_sorted_by_ratings

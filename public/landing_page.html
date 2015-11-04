@@ -5,6 +5,7 @@
     <link href="landing_page.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="http://maps.googleapis.com/maps/api/js"></script>
+    <script src="landing_page.js"></script>
     <script>
       $(document).ready(function(){
         var coordinates = new google.maps.LatLng(32.7475811,-117.1311596);
@@ -22,7 +23,7 @@
 
   </head>
   <body>
-    <a href="/users/login">Login</a> 
+    <a href="/users/login">Login</a>
 
 
     <div class="container">
@@ -39,10 +40,23 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6" id="recipe_scroll"><h2></h2></div>
+        <div class="col-md-3"> </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4" id="recipe_image"></div>
+        <div class="col-md-4"></div>
+      </div>
+
+
+      <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4" id="googleMap" style="width: 300px; height: 300px;"></div>
         <div class="col-md-4"></div>
       </div>
+
     </div><!--close container -->
 
   </body>

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root :to => 'welcome#index'
-
+  match('/recipes/get_random_recipe', {:via => :get, :from => 'recipes#get_random_recipe'})
   devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
   match('/recipes/search', {:via => :get, :to => 'recipes#search_by_ingredients'})
   match('/recipes/:id/add_rating', {:via => :post, :to => 'recipes#add_rating'})
